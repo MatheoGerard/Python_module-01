@@ -1,0 +1,34 @@
+class Plant:
+    def __init__(self, name: str, height: float, height_spd: float, age: int):
+        self.name = name
+        self.height = height
+        self.height_spd = height_spd
+        self.age = age
+
+    def grow(self):
+        self.height += self.height_spd
+
+    def add_age(self):
+        self.age += 1
+
+    def show(self):
+        print(f"{self.name}: {round(self.height, 1)}cm, {self.age} days old")
+
+
+def plant_evolution() -> None:
+    rose = Plant("Rose", 25.0, 0.8, 30)
+    print("=== Garden Plant Growth ===")
+    rose.show()
+    total_value: float = 0.0
+    week = range(1, 8)
+    for day in week:
+        print(f"=== Day {day} ===")
+        rose.grow()
+        total_value += rose.height_spd
+        rose.add_age()
+        rose.show()
+    print(f"Growth this week: {total_value}cm")
+
+
+if __name__ == "__main__":
+    plant_evolution()
