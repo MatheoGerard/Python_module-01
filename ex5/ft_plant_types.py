@@ -47,7 +47,7 @@ class Plant:
 
     def show(self) -> str:
         return (
-            f"{self.name}: {round(self.get_height(), 1)}cm,"
+            f"{self.name}: {round(self.get_height(), 1)}cm, "
             f"{self.get_age()} days old"
         )
 
@@ -66,40 +66,119 @@ class Flower(Plant):
             self._color = color
         else:
             self._color = "default"
-            print("color is not define")
+            print("color is not defined")
 
     def get_color(self) -> str:
         return self._color
 
     def bloom(self) -> None:
-        if not self._is_bloom:
+        if not self.get_bloom_state():
             self._is_bloom = True
 
     def get_bloom_state(self) -> bool:
-        return _is_bloom
+        return self._is_bloom
 
     def print_bloom_state(self) -> str:
-        if self._is_bloom:
-            return f"{self.name} is blooming NICE"
+        if self.get_bloom_state():
+            return f"{self.name} is blooming beautifully!"
         else:
            return f"{self.name} has not bloomed yet"
 
     def show(self) -> str:
         parent_info: str = super().show()
-        return f"{parent_info}\nColor: {self.get_color()}\n{self.print_bloom_state()}"
+        print(f"{parent_info}\nColor: {self.get_color()}\n{self.print_bloom_state()}")
+
+class Tree(Plant):
+    def __init__(self, name: str, height: float, height_spd: float, age: int, trunk_diameter: float) -> None:
+        super().__init__(name, height, height_spd, age)
+        self.set_trunk_dia(trunk_diameter)
+
+    def set_trunk_dia(self, trunk_diameter) -> None:
+        if trunk_diameter >= 0:
+            self.trunk_diameter = trunk_diameter
+        else:
+            self.trunk_diameter = 0
+            print("trunk_diameter is not defined")
+
+    def get_trunk_dia(self) -> float:
+        return self.trunk_diameter
+
+    def produce_shade(self) -> None:
+        print(f"Tree Oak now produces a shade of {self.get_height()}cm long and {self.get_trunk_dia()} cm wide.")
+
+    def show(self):
+        parent_info: str = super().show()
+        print(f"{parent_info}\nTrunk diameter: {self.get_trunk_dia()}cm")
+
+class Vegetable(Plant):
+    def __init__(self, name: str, height: float, height_spd: float, age: int, harvest_season: str) -> None:
+        super().__init__(name, height, height_spd, age)
+        self.set_harvest_season(harvest_season)
+        self.set_nutritional_value()
+
+    def set_harvest_season(self, harvest_season: str) -> None:
+        if harvest_season:
+            self._harvest_season = harvest_season
+        else:
+            self._harvest_season = "default"
+            print("harvest_season is not defined")
+
+    def get_harvest_season(self) -> str:
+        return self._harvest_season
+
+    def set_nutritional_value(self) -> None:
+        self._nutritional_value = 0
+
+    def nutritional_value_increase(self) -> None:
+        self._nutritional_value += self.get_nutritional_value() + 1
+
+    def grow(self) -> None:
+        super().grow()
+        self.nutritional_value_increase()
+
+    def add_age(self) -> None:
+        super().add_age()
+        self.nutritional_value_increase()
+
+    def get_nutritional_value(self) -> int:
+        return self._nutritional_value
+
+    def show(self):
+        parent_info: str = super().show()
+        print(f"{parent_info}\nHarvest season: {self.get_harvest_season()}\nNutritional value: {self.get_nutritional_value()}")
 
 
 
-def main():
-    flower = Flower("Rose", 8, 8, 30, "red")
-    print(flower.show())
+def main_flower():
+    flower = Flower("Rose", 8.0, 8.0, 30, "red")
+    flower.show()
+    print("[asking the rose to bloom]")
     flower.bloom()
-    print(flower.show())
+    flower.show()
+
+
+def main_tree():
+    tree = Tree("Oak", 200.0, 8.0, 365, 5.0)
+    tree.show()
+    print("[asking the oak to produce shade]")
+    tree.produce_shade()
+
+
+def main_vegetables():
+    vegetable = Vegetable("Tomato", 5.0, .4, 10, "april")
+    vegetable.show()
+    print("[make tomato grow and age for 20 days]")
+
 
 if __name__ == "__main__":
     print("=== Garden Plant Types ===")
-    print("=== Flower ===")
-    main()
+    #print("=== Flower")
+    #main_flower()
+    #print()
+    #print("=== Tree")
+    #main_tree()
+    #print()
+    main_vegetables()
 
 
 
