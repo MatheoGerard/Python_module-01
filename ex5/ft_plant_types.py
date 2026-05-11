@@ -1,5 +1,5 @@
 class Plant:
-    def __init__(self, name: str, height: float, height_spd: float, age: int):
+    def __init__(self, name: str, height: float, height_spd: float, age: int) -> None:
         if name:
             self.name = name
         else:
@@ -11,7 +11,7 @@ class Plant:
         self.set_height(height, 1)
         self.set_age(age, 1)
 
-    def set_age(self, age, is_init=0):
+    def set_age(self, age, is_init=0) -> None:
         if age >= 0:
             self._age = age
             if is_init == 0:
@@ -22,7 +22,7 @@ class Plant:
             print(f"{self.name.capitalize()}: Error, age can't be negative")
             print("Age update rejected")
 
-    def set_height(self, height, is_init=0):
+    def set_height(self, height, is_init=0) -> None:
         if height >= 0:
             self._height = height
             if is_init == 0:
@@ -39,10 +39,10 @@ class Plant:
     def get_age(self) -> int:
         return self._age
 
-    def grow(self):
+    def grow(self) -> None:
         self._height += self.height_spd
 
-    def add_age(self):
+    def add_age(self) -> None:
         self._age += 1
 
     def show(self) -> str:
@@ -51,21 +51,21 @@ class Plant:
             f"{self.get_age()} days old"
         )
 
-    def current_state(self):
+    def current_state(self) -> None:
         print("Current state: " + self.show())
 
 
 class Flower(Plant):
     def __init__(self, name: str, height: float, height_spd: float, age: int, color: str):
         super().__init__(name, height, height_spd, age)
-        self.set_color = color
-        self._is_bloom: bool = false
+        self.set_color(color)
+        self._is_bloom: bool = False
 
-    def set_color(self) -> None:
+    def set_color(self, color) -> None:
         if color:
             self._color = color
         else:
-            set_color = "default"
+            self._color = "default"
             print("color is not define")
 
     def get_color(self) -> str:
@@ -73,10 +73,33 @@ class Flower(Plant):
 
     def bloom(self) -> None:
         if not self._is_bloom:
-            self._is_bloom = true
+            self._is_bloom = True
 
-    def 
+    def get_bloom_state(self) -> bool:
+        return _is_bloom
 
+    def print_bloom_state(self) -> str:
+        if self._is_bloom:
+            return f"{self.name} is blooming NICE"
+        else:
+           return f"{self.name} has not bloomed yet"
+
+    def show(self) -> str:
+        parent_info: str = super().show()
+        return f"{parent_info}\nColor: {self.get_color()}\n{self.print_bloom_state()}"
+
+
+
+def main():
+    flower = Flower("Rose", 8, 8, 30, "red")
+    print(flower.show())
+    flower.bloom()
+    print(flower.show())
+
+if __name__ == "__main__":
+    print("=== Garden Plant Types ===")
+    print("=== Flower ===")
+    main()
 
 
 
