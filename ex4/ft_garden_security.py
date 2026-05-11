@@ -4,36 +4,40 @@ class Plant:
             self.name = name
         else:
             self.name = "default"
-        if height >= 0:
-            self.set_height(height)
-        else:
-            self.set_height(0)
         if height_spd >= 0:
             self.height_spd = height_spd
         else:
-            self.height_spd = .5
-        if age >= 0:
-            self.set_age(age)
-        else:
-            self.set_age(0)
+            self.height_spd = 0
+        self.set_height(height, 1)
+        self.set_age(age, 1)
 
-    def set_age(self, age):
+    def set_age(self, age, is_init=0):
         if age >= 0:
             self._age = age
+            if is_init == 0:
+                print(f"Age updated: {self._age} days")
         else:
-            print("invalid age")
+            if is_init == 1:
+                self._age = 0
+            print(f"{self.name.capitalize()}: Error, age can't be negative")
+            print("Age update rejected")
 
-    def get_age(self) -> int:
-        return self._age
-
-    def set_height(self, height):
+    def set_height(self, height, is_init=0):
         if height >= 0:
             self._height = height
+            if is_init == 0:
+                print(f"Height updated: {self._height}cm")
         else:
-            print("invalid height")
+            if is_init == 1:
+                self._height = 0
+            print(f"{self.name.capitalize()}: Error, height can't be negative")
+            print("Height update rejected")
 
     def get_height(self) -> float:
         return self._height
+
+    def get_age(self) -> int:
+        return self._age
 
     def grow(self):
         self._height += self.height_spd
@@ -42,18 +46,30 @@ class Plant:
         self._age += 1
 
     def show(self) -> str:
-        return f"{self.name}: {round(self._height, 1)}cm, {self._age} days old"
+        return (
+            f"{self.name}: {round(self.get_height(), 1)}cm,"
+            f"{self.get_age()} days old"
+        )
+
+    def current_state(self):
+        print("Current state: " + self.show())
 
 
 def ft_garden_security():
-    rose = Plant("Rose", 8, 8, 3)
-#    print(rose.show())
-    print(f"ma plant a {rose.get_age()} jours, et fais {rose.get_height()} cm")
-    rose.set_age(-30)
-    rose.set_height(-18)
-    print(f"ma plant a {rose.get_age()} jours, et fais {rose.get_height()} cm")
-#    print(rose.show())
+    created = Plant("Rose", 8, 8, 3)
+    created.current_state()
+    print()
+    created.set_age(30)
+    created.set_height(188)
+    print()
+    created.current_state()
+    print()
+    created.set_age(-30)
+    created.set_height(-188)
+    print()
+    created.current_state()
 
 
 if __name__ == "__main__":
+    print("=== Garden Security System ===")
     ft_garden_security()
