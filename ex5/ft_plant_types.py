@@ -130,7 +130,7 @@ class Vegetable(Plant):
         self._nutritional_value = 0
 
     def nutritional_value_increase(self) -> None:
-        self._nutritional_value += self.get_nutritional_value() + 1
+        self._nutritional_value += .5 
 
     def grow(self) -> None:
         super().grow()
@@ -145,7 +145,7 @@ class Vegetable(Plant):
 
     def show(self):
         parent_info: str = super().show()
-        print(f"{parent_info}\nHarvest season: {self.get_harvest_season()}\nNutritional value: {self.get_nutritional_value()}")
+        print(f"{parent_info}\nHarvest season: {self.get_harvest_season()}\nNutritional value: {int(self.get_nutritional_value())}")
 
 
 
@@ -165,24 +165,25 @@ def main_tree():
 
 
 def main_vegetables():
-    vegetable = Vegetable("Tomato", 5.0, .4, 10, "april")
+    vegetable = Vegetable("Tomato", 5.0, 2.1, 10, "april")
     vegetable.show()
     print("[make tomato grow and age for 20 days]")
+    periode = range(0, 20)
+    for days in periode:
+        vegetable.grow()
+        vegetable.add_age()
+    vegetable.show()
 
 
 if __name__ == "__main__":
     print("=== Garden Plant Types ===")
-    #print("=== Flower")
-    #main_flower()
-    #print()
-    #print("=== Tree")
-    #main_tree()
-    #print()
+    print("=== Flower")
+    main_flower()
+    print()
+    print("=== Tree")
+    main_tree()
+    print()
+    print("=== Vegetable")
+    print()
     main_vegetables()
-
-
-
-
-
-
-
+    print()
