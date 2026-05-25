@@ -14,10 +14,11 @@ class Plant:
     @staticmethod
     def check_year(age):
         if age > 365:
-            print("")
+            print(f"Is {age} days more than a year? -> True")
+        else:
+            print(f"Is {age} days more than a year? -> False")
 
-
-    def set_age(self, age, is_init=0) -> None:
+    def set_age(age, is_init=0) -> None:
         if age >= 0:
             self._age = age
             if is_init == 0:
@@ -154,4 +155,11 @@ class Vegetable(Plant):
         print(f"{parent_info}\nHarvest season: {self.get_harvest_season()}\nNutritional value: {int(self.get_nutritional_value())}")
 
 
+def main_flower():
+    flower = Flower("Rose", 10, .8, 500, "blue")
+    check_year(flower)
+
+
+if __name__ == "__main__":
+    main_flower()
 
