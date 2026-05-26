@@ -218,6 +218,11 @@ def main_flower() -> None:
     print("[statistics for Rose]")
     flower.display_stats()
     print("[asking the rose to grow and bloom]")
+    flower.grow()
+    flower.bloom()
+    flower.show()
+    print("[asking the rose to grow and bloom]")
+    flower.display_stats()
 
 
 def Unknown_plant_main() -> None:
