@@ -10,6 +10,7 @@ class Plant:
             self.spd = 0
         self.set_height(height, 1)
         self.set_age(age, 1)
+        self._stats = self._Stats()
 
     def set_age(self, age, is_init=0) -> None:
         if age >= 0:
@@ -41,38 +42,13 @@ class Plant:
 
     def grow(self) -> None:
         self._height += self.spd
+        self._stats.call_grow()
 
     def add_age(self) -> None:
         self._age += 1
+        self._stats.call_age()
 
-    def show(self) -> None:
-        print(
-            f"{self.name}: {round(self.get_height(), 1)}cm, {self.get_age()} days old"
-        )
-
-    def current_state(self) -> None:
-        print("Current state: ", end="")
-        self.show()
-
-    @staticmethod
-    def check_year(age) -> None:
-        if age > 365:
-            print(f"Is {age} days more than a year? -> True")
-        else:
-            print(f"Is {age} days more than a year? -> False")
-
-    @classmethod
-    def undefined_creator(cls) -> "object":
-        return cls(name="Unknown plant", height=0, spd=0, age=0)
-
-
-class Flower(Plant):
-    def __init__(self, name: str, height: float, spd: float, age: int, color: str):
-        super().__init__(name, height, spd, age)
-        self.set_color(color)
-        self._is_bloom: bool = False
-
-    class _stats_flower:
+    class _Stats:
         def __init__(self) -> None:
             self._grow_call: int = 0
             self._add_age_call: int = 0
@@ -96,8 +72,41 @@ class Flower(Plant):
         def get_show_calls(self) -> int:
             return self._show_call
 
-        def display_stats(self):
-            print(f"Stats: {self.get_grow_calls()} grow, {self.get_age_calls()} age, {self.get_show_calls()} show.")
+        def display_stats(self) -> None:
+            print(
+                f"Stats: {self.get_grow_calls()} grow, {self.get_age_calls()} age, {self.get_show_calls()} show."
+            )
+
+    def display_stats(self) -> None:
+        self._stats.display_stats()
+
+    def show(self) -> None:
+        print(
+            f"{self.name}: {round(self.get_height(), 1)}cm, {self.get_age()} days old"
+        )
+        self._stats.call_show()
+
+    def current_state(self) -> None:
+        print("Current state: ", end="")
+        self.show()
+
+    @staticmethod
+    def check_year(age) -> None:
+        if age > 365:
+            print(f"Is {age} days more than a year? -> True")
+        else:
+            print(f"Is {age} days more than a year? -> False")
+
+    @classmethod
+    def undefined_creator(cls):
+        return cls(name="Unknown plant", height=0, spd=0, age=0)
+
+
+class Flower(Plant):
+    def __init__(self, name: str, height: float, spd: float, age: int, color: str):
+        super().__init__(name, height, spd, age)
+        self.set_color(color)
+        self._is_bloom: bool = False
 
     def set_color(self, color) -> None:
         if color:
@@ -205,7 +214,10 @@ def main_check_year() -> None:
 
 def main_flower() -> None:
     flower = Flower("Rose", 22, 1, 34, "Red")
-    Flower.check_year(flower.get_age())
+    flower.show()
+    print("[statistics for Rose]")
+    flower.display_stats()
+    print("[asking the rose to grow and bloom]")
 
 
 def Unknown_plant_main() -> None:
