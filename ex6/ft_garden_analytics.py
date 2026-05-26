@@ -141,6 +141,7 @@ class Tree(Plant):
         self, name: str, height: float, spd: float, age: int, trunk_diameter: float
     ) -> None:
         super().__init__(name, height, spd, age)
+        self._stats = Tree._Stats()
         self.set_trunk_dia(trunk_diameter)
 
     def set_trunk_dia(self, trunk_diameter) -> None:
@@ -153,10 +154,26 @@ class Tree(Plant):
     def get_trunk_dia(self) -> float:
         return self.trunk_diameter
 
+    class _Stats(Plant._Stats):
+        def __init__(self) -> None:
+            super().__init__()
+            self._call_shade: int = 0
+
+        def add_call_shade(self) -> None:
+            self._call_shade += 1
+
+        def get_shade_count(self) -> int:
+            return self._call_shade
+
+        def display_stats(self) -> None:
+            super().display_stats()
+            print(f"{self.get_shade_count()} shade")
+
     def produce_shade(self) -> None:
         print(
             f"Tree Oak now produces a shade of {self.get_height()}cm long and {self.get_trunk_dia()} cm wide."
         )
+        self._stats.add_call_shade()
 
     def show(self) -> None:
         super().show()
@@ -225,6 +242,17 @@ def main_flower() -> None:
     flower.display_stats()
 
 
+def tree_main():
+    tree = Tree("Oak", 200, 2, 365, 5)
+    tree.show()
+    print("[statistics for Oak]")
+    tree.display_stats()
+    print("[asking the oak to produce shade]")
+    tree.produce_shade()
+    print("[statistics for Oak]")
+    tree.display_stats()
+
+
 def Unknown_plant_main() -> None:
     unknown_plant = Plant.undefined_creator()
     unknown_plant.show()
@@ -236,6 +264,9 @@ if __name__ == "__main__":
     main_check_year()
     print("=== Flower")
     main_flower()
+    print()
+    print("=== Tree")
+    tree_main()
     print()
     print("=== Unknown plant")
     Unknown_plant_main()
