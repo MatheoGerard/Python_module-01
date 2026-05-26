@@ -47,7 +47,8 @@ class Plant:
 
     def show(self) -> None:
         print(
-            f"{self.name}: {round(self.get_height(), 1)}cm, {self.get_age()} days old"
+            f"{self.name}: {round(self.get_height(), 1)}cm, "
+            f"{self.get_age()} days old"
         )
 
     def current_state(self) -> None:
@@ -56,7 +57,8 @@ class Plant:
 
 
 class Flower(Plant):
-    def __init__(self, name: str, height: float, spd: float, age: int, color: str):
+    def __init__(self, name: str, height: float, spd: float,
+                 age: int, color: str) -> None:
         super().__init__(name, height, spd, age)
         self.set_color(color)
         self._is_bloom: bool = False
@@ -91,8 +93,8 @@ class Flower(Plant):
 
 class Tree(Plant):
     def __init__(
-        self, name: str, height: float, spd: float, age: int, trunk_diameter: float
-    ) -> None:
+        self, name: str, height: float, spd: float, age: int,
+            trunk_diameter: float) -> None:
         super().__init__(name, height, spd, age)
         self.set_trunk_dia(trunk_diameter)
 
@@ -108,7 +110,8 @@ class Tree(Plant):
 
     def produce_shade(self) -> None:
         print(
-            f"Tree Oak now produces a shade of {self.get_height()}cm long and {self.get_trunk_dia()} cm wide."
+            f"Tree Oak now produces a shade of {self.get_height()}cm "
+            f"long and {self.get_trunk_dia()} cm wide."
         )
 
     def show(self) -> None:
@@ -118,7 +121,8 @@ class Tree(Plant):
 
 class Vegetable(Plant):
     def __init__(
-        self, name: str, height: float, spd: float, age: int, harvest_season: str
+        self, name: str, height: float, spd: float,
+        age: int, harvest_season: str
     ) -> None:
         super().__init__(name, height, spd, age)
         self.set_harvest_season(harvest_season)
@@ -154,7 +158,8 @@ class Vegetable(Plant):
     def show(self) -> None:
         super().show()
         print(
-            f"Harvest season: {self.get_harvest_season()}\nNutritional value: {int(self.get_nutritional_value())}"
+            f"Harvest season: {self.get_harvest_season()}\n"
+            f"Nutritional value: {int(self.get_nutritional_value())}"
         )
 
 
@@ -193,6 +198,5 @@ if __name__ == "__main__":
     main_tree()
     print()
     print("=== Vegetable")
-    print()
     main_vegetables()
     print()
