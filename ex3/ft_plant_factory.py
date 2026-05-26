@@ -1,14 +1,14 @@
 class Plant:
-    def __init__(self, name: str, height: float, height_spd: float, age: int):
+    def __init__(self, name: str, height: float, height_spd: float, age: int) -> None:
         self.name = name
         self.height = height
         self.height_spd = height_spd
         self.age = age
 
-    def grow(self):
+    def grow(self) -> None:
         self.height += self.height_spd
 
-    def add_age(self):
+    def add_age(self) -> None:
         self.age += 1
 
     def show(self) -> str:
@@ -17,11 +17,11 @@ class Plant:
 
 def plant_factory() -> None:
     plants = [
-            Plant("Rose", 25.0, .8, 30),
-            Plant("Oak", 200.0, .2, 365),
-            Plant("Cactus", 5.0, .1, 90),
-            Plant("Sunflower", 80.0, 1.2, 45),
-            Plant("Fern", 15.0, .7, 120)
+        Plant("Rose", 25.0, 0.8, 30),
+        Plant("Oak", 200.0, 0.2, 365),
+        Plant("Cactus", 5.0, 0.1, 90),
+        Plant("Sunflower", 80.0, 1.2, 45),
+        Plant("Fern", 15.0, 0.7, 120),
     ]
     for plant in plants:
         print("Created: " + plant.show())

@@ -55,11 +55,15 @@ class Plant:
         self.show()
 
     @staticmethod
-    def check_year(age):
+    def check_year(age) -> None:
         if age > 365:
             print(f"Is {age} days more than a year? -> True")
         else:
             print(f"Is {age} days more than a year? -> False")
+
+    @classmethod
+    def undefined_creator(cls) -> "object":
+        return cls(name="Unknown plant", height=0, spd=0, age=0)
 
 
 class Flower(Plant):
@@ -67,6 +71,33 @@ class Flower(Plant):
         super().__init__(name, height, spd, age)
         self.set_color(color)
         self._is_bloom: bool = False
+
+    class _stats_flower:
+        def __init__(self) -> None:
+            self._grow_call: int = 0
+            self._add_age_call: int = 0
+            self._show_call: int = 0
+
+        def call_grow(self) -> None:
+            self._grow_call += 1
+
+        def call_age(self) -> None:
+            self._add_age_call += 1
+
+        def call_show(self) -> None:
+            self._show_call += 1
+
+        def get_grow_calls(self) -> int:
+            return self._grow_call
+
+        def get_age_calls(self) -> int:
+            return self._add_age_call
+
+        def get_show_calls(self) -> int:
+            return self._show_call
+
+        def display_stats(self):
+            print(f"Stats: {self.get_grow_calls()} grow, {self.get_age_calls()} age, {self.get_show_calls()} show.")
 
     def set_color(self, color) -> None:
         if color:
@@ -165,16 +196,21 @@ class Vegetable(Plant):
         )
 
 
-def main_check_year():
+def main_check_year() -> None:
     plant = Plant("undefined", 60, 5, 75)
     Plant.check_year(plant.get_age())
     plant2 = Plant("undefined", 60, 5, 6548)
     Plant.check_year(plant2.get_age())
 
 
-def main_flower():
+def main_flower() -> None:
     flower = Flower("Rose", 22, 1, 34, "Red")
     Flower.check_year(flower.get_age())
+
+
+def Unknown_plant_main() -> None:
+    unknown_plant = Plant.undefined_creator()
+    unknown_plant.show()
 
 
 if __name__ == "__main__":
@@ -183,3 +219,6 @@ if __name__ == "__main__":
     main_check_year()
     print("=== Flower")
     main_flower()
+    print()
+    print("=== Unknown plant")
+    Unknown_plant_main()

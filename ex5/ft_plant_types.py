@@ -47,8 +47,7 @@ class Plant:
 
     def show(self) -> None:
         print(
-            f"{self.name}: {round(self.get_height(), 1)}cm, "
-            f"{self.get_age()} days old"
+            f"{self.name}: {round(self.get_height(), 1)}cm, {self.get_age()} days old"
         )
 
     def current_state(self) -> None:
@@ -57,8 +56,9 @@ class Plant:
 
 
 class Flower(Plant):
-    def __init__(self, name: str, height: float, spd: float,
-                 age: int, color: str) -> None:
+    def __init__(
+        self, name: str, height: float, spd: float, age: int, color: str
+    ) -> None:
         super().__init__(name, height, spd, age)
         self.set_color(color)
         self._is_bloom: bool = False
@@ -93,8 +93,8 @@ class Flower(Plant):
 
 class Tree(Plant):
     def __init__(
-        self, name: str, height: float, spd: float, age: int,
-            trunk_diameter: float) -> None:
+        self, name: str, height: float, spd: float, age: int, trunk_diameter: float
+    ) -> None:
         super().__init__(name, height, spd, age)
         self.set_trunk_dia(trunk_diameter)
 
@@ -121,8 +121,7 @@ class Tree(Plant):
 
 class Vegetable(Plant):
     def __init__(
-        self, name: str, height: float, spd: float,
-        age: int, harvest_season: str
+        self, name: str, height: float, spd: float, age: int, harvest_season: str
     ) -> None:
         super().__init__(name, height, spd, age)
         self.set_harvest_season(harvest_season)
@@ -163,7 +162,7 @@ class Vegetable(Plant):
         )
 
 
-def main_flower():
+def main_flower() -> None:
     flower = Flower("Rose", 8.0, 8.0, 30, "red")
     flower.show()
     print("[asking the rose to bloom]")
@@ -171,14 +170,14 @@ def main_flower():
     flower.show()
 
 
-def main_tree():
+def main_tree() -> None:
     tree = Tree("Oak", 200.0, 8.0, 365, 5.0)
     tree.show()
     print("[asking the oak to produce shade]")
     tree.produce_shade()
 
 
-def main_vegetables():
+def main_vegetables() -> None:
     vegetable = Vegetable("Tomato", 5.0, 2.1, 10, "april")
     vegetable.show()
     print("[make tomato grow and age for 20 days]")
