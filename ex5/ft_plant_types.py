@@ -47,8 +47,7 @@ class Plant:
 
     def show(self) -> None:
         print(
-            f"{self.name}: {round(self.get_height(), 1)}cm, "
-            f"{self.get_age()} days old"
+            f"{self.name}: {round(self.get_height(), 1)}cm, {self.get_age()} days old"
         )
 
     def current_state(self) -> None:
@@ -91,7 +90,9 @@ class Flower(Plant):
 
 
 class Tree(Plant):
-    def __init__(self, name: str, height: float, spd: float, age: int, trunk_diameter: float) -> None:
+    def __init__(
+        self, name: str, height: float, spd: float, age: int, trunk_diameter: float
+    ) -> None:
         super().__init__(name, height, spd, age)
         self.set_trunk_dia(trunk_diameter)
 
@@ -106,7 +107,9 @@ class Tree(Plant):
         return self.trunk_diameter
 
     def produce_shade(self) -> None:
-        print(f"Tree Oak now produces a shade of {self.get_height()}cm long and {self.get_trunk_dia()} cm wide.")
+        print(
+            f"Tree Oak now produces a shade of {self.get_height()}cm long and {self.get_trunk_dia()} cm wide."
+        )
 
     def show(self) -> None:
         super().show()
@@ -114,7 +117,9 @@ class Tree(Plant):
 
 
 class Vegetable(Plant):
-    def __init__(self, name: str, height: float, spd: float, age: int, harvest_season: str) -> None:
+    def __init__(
+        self, name: str, height: float, spd: float, age: int, harvest_season: str
+    ) -> None:
         super().__init__(name, height, spd, age)
         self.set_harvest_season(harvest_season)
         self.set_nutritional_value()
@@ -133,7 +138,7 @@ class Vegetable(Plant):
         self._nutritional_value = 0.0
 
     def nutritional_value_increase(self) -> None:
-        self._nutritional_value += .5
+        self._nutritional_value += 0.5
 
     def grow(self) -> None:
         super().grow()
@@ -148,7 +153,9 @@ class Vegetable(Plant):
 
     def show(self) -> None:
         super().show()
-        print(f"Harvest season: {self.get_harvest_season()}\nNutritional value: {int(self.get_nutritional_value())}")
+        print(
+            f"Harvest season: {self.get_harvest_season()}\nNutritional value: {int(self.get_nutritional_value())}"
+        )
 
 
 def main_flower():
@@ -171,7 +178,7 @@ def main_vegetables():
     vegetable.show()
     print("[make tomato grow and age for 20 days]")
     periode = range(0, 20)
-    for days in periode:
+    for _ in periode:
         vegetable.grow()
         vegetable.add_age()
     vegetable.show()
