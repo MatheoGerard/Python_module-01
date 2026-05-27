@@ -136,6 +136,28 @@ class Flower(Plant):
         print(f"Color: {self.get_color()}\n{self.print_bloom_state()}")
 
 
+class Seed(Flower):
+    def __init__(
+        self, name: str, height: float, spd: float, age: int, color: str
+    ) -> None:
+        super().__init__(name, height, spd, age, color)
+        self._seed_count = 0
+
+    def seed_add(self) -> None:
+        self._seed_count += 1
+
+    def get_seed_count(self) -> int:
+        return self._seed_count
+
+    def bloom(self) -> None:
+        super().bloom()
+        self.seed_add()
+
+    def show(self) -> None:
+        super().show()
+        print(f"Seeds: {self.get_seed_count()}")
+
+
 class Tree(Plant):
     def __init__(
         self, name: str, height: float, spd: float, age: int, trunk_diameter: float
@@ -222,6 +244,10 @@ class Vegetable(Plant):
         )
 
 
+def check_stats(plant: Plant):
+    plant.display_stats()
+
+
 def main_check_year() -> None:
     plant = Plant("undefined", 60, 5, 75)
     Plant.check_year(plant.get_age())
@@ -232,25 +258,37 @@ def main_check_year() -> None:
 def main_flower() -> None:
     flower = Flower("Rose", 22, 1, 34, "Red")
     flower.show()
-    print("[statistics for Rose]")
+    print(f"[statistics for {flower.name}]")
     flower.display_stats()
-    print("[asking the rose to grow and bloom]")
+    print(f"[asking the {flower.name} to grow and bloom]")
     flower.grow()
     flower.bloom()
     flower.show()
-    print("[asking the rose to grow and bloom]")
+    print(f"[asking the {flower.name} to grow and bloom]")
     flower.display_stats()
 
 
 def tree_main():
     tree = Tree("Oak", 200, 2, 365, 5)
     tree.show()
-    print("[statistics for Oak]")
+    print(f"[statistics for {tree.name}]")
     tree.display_stats()
-    print("[asking the oak to produce shade]")
+    print(f"[asking the {tree.name} to produce shade]")
     tree.produce_shade()
-    print("[statistics for Oak]")
+    print(f"[statistics for {tree.name}]")
     tree.display_stats()
+
+
+def seed_main():
+    seed = Seed("Sunflower", 80, 5, 45, "yellow")
+    seed.show()
+    print(f"[make {seed.name} grow, age and bloom]")
+    seed.grow()
+    seed.add_age()
+    seed.bloom()
+    seed.show()
+    print("[statistics for Sunflower]")
+    seed.display_stats()
 
 
 def Unknown_plant_main() -> None:
@@ -268,5 +306,19 @@ if __name__ == "__main__":
     print("=== Tree")
     tree_main()
     print()
+    print("=== Seeds")
+    seed_main()
+    print()
     print("=== Unknown plant")
     Unknown_plant_main()
+    print()
+    print("=== Test check_stats ext")
+    fleur = Flower("Lila", 7, 0.1, 23, "purple")
+    fleur.show()
+    fleur.add_age()
+    fleur.grow()
+    fleur.add_age()
+    fleur.add_age()
+    fleur.grow()
+    fleur.show()
+    check_stats(fleur)
