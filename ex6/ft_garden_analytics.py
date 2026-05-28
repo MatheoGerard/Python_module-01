@@ -74,7 +74,9 @@ class Plant:
 
         def display_stats(self) -> None:
             print(
-                f"Stats: {self.get_grow_calls()} grow, {self.get_age_calls()} age, {self.get_show_calls()} show."
+                f"Stats: {self.get_grow_calls()} grow, "
+                f"{self.get_age_calls()} age, "
+                f"{self.get_show_calls()} show."
             )
 
     def display_stats(self) -> None:
@@ -82,7 +84,8 @@ class Plant:
 
     def show(self) -> None:
         print(
-            f"{self.name}: {round(self.get_height(), 1)}cm, {self.get_age()} days old"
+            f"{self.name}: {round(self.get_height(), 1)}cm, "
+            f"{self.get_age()} days old"
         )
         self._stats.call_show()
 
@@ -103,7 +106,9 @@ class Plant:
 
 
 class Flower(Plant):
-    def __init__(self, name: str, height: float, spd: float, age: int, color: str):
+    def __init__(
+        self, name: str, height: float, spd: float, age: int, color: str
+    ) -> None:
         super().__init__(name, height, spd, age)
         self.set_color(color)
         self._is_bloom: bool = False
@@ -160,10 +165,15 @@ class Seed(Flower):
 
 class Tree(Plant):
     def __init__(
-        self, name: str, height: float, spd: float, age: int, trunk_diameter: float
+        self,
+        name: str,
+        height: float,
+        spd: float,
+        age: int,
+        trunk_diameter: float,
     ) -> None:
         super().__init__(name, height, spd, age)
-        self._stats = Tree._Stats()
+        self._stats: Tree._Stats = Tree._Stats()
         self.set_trunk_dia(trunk_diameter)
 
     def set_trunk_dia(self, trunk_diameter) -> None:
@@ -193,7 +203,8 @@ class Tree(Plant):
 
     def produce_shade(self) -> None:
         print(
-            f"Tree Oak now produces a shade of {self.get_height()}cm long and {self.get_trunk_dia()} cm wide."
+            f"Tree Oak now produces a shade of {self.get_height()}cm "
+            f"long and {self.get_trunk_dia()} cm wide."
         )
         self._stats.add_call_shade()
 
@@ -204,7 +215,12 @@ class Tree(Plant):
 
 class Vegetable(Plant):
     def __init__(
-        self, name: str, height: float, spd: float, age: int, harvest_season: str
+        self,
+        name: str,
+        height: float,
+        spd: float,
+        age: int,
+        harvest_season: str,
     ) -> None:
         super().__init__(name, height, spd, age)
         self.set_harvest_season(harvest_season)
@@ -240,11 +256,12 @@ class Vegetable(Plant):
     def show(self) -> None:
         super().show()
         print(
-            f"Harvest season: {self.get_harvest_season()}\nNutritional value: {int(self.get_nutritional_value())}"
+            f"Harvest season: {self.get_harvest_season()}\n"
+            f"Nutritional value: {int(self.get_nutritional_value())}"
         )
 
 
-def check_stats(plant: Plant):
+def check_stats(plant: Plant) -> None:
     plant.display_stats()
 
 
@@ -268,7 +285,7 @@ def main_flower() -> None:
     flower.display_stats()
 
 
-def tree_main():
+def tree_main() -> None:
     tree = Tree("Oak", 200, 2, 365, 5)
     tree.show()
     print(f"[statistics for {tree.name}]")
@@ -279,7 +296,7 @@ def tree_main():
     tree.display_stats()
 
 
-def seed_main():
+def seed_main() -> None:
     seed = Seed("Sunflower", 80, 5, 45, "yellow")
     seed.show()
     print(f"[make {seed.name} grow, age and bloom]")
@@ -294,6 +311,7 @@ def seed_main():
 def Unknown_plant_main() -> None:
     unknown_plant = Plant.undefined_creator()
     unknown_plant.show()
+    unknown_plant.display_stats()
 
 
 if __name__ == "__main__":

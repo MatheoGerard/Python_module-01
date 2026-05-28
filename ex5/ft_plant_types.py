@@ -11,7 +11,7 @@ class Plant:
         self.set_height(height, 1)
         self.set_age(age, 1)
 
-    def set_age(self, age, is_init=0) -> None:
+    def set_age(self, age: int, is_init=0) -> None:
         if age >= 0:
             self._age = age
             if is_init == 0:
@@ -22,7 +22,7 @@ class Plant:
             print(f"{self.name.capitalize()}: Error, age can't be negative")
             print("Age update rejected")
 
-    def set_height(self, height, is_init=0) -> None:
+    def set_height(self, height: float, is_init=0) -> None:
         if height >= 0:
             self._height = height
             if is_init == 0:
@@ -47,7 +47,8 @@ class Plant:
 
     def show(self) -> None:
         print(
-            f"{self.name}: {round(self.get_height(), 1)}cm, {self.get_age()} days old"
+            f"{self.name}: {round(self.get_height(), 1)}cm, "
+            f"{self.get_age()} days old"
         )
 
     def current_state(self) -> None:
@@ -93,7 +94,12 @@ class Flower(Plant):
 
 class Tree(Plant):
     def __init__(
-        self, name: str, height: float, spd: float, age: int, trunk_diameter: float
+        self,
+        name: str,
+        height: float,
+        spd: float,
+        age: int,
+        trunk_diameter: float,
     ) -> None:
         super().__init__(name, height, spd, age)
         self.set_trunk_dia(trunk_diameter)
@@ -121,7 +127,12 @@ class Tree(Plant):
 
 class Vegetable(Plant):
     def __init__(
-        self, name: str, height: float, spd: float, age: int, harvest_season: str
+        self,
+        name: str,
+        height: float,
+        spd: float,
+        age: int,
+        harvest_season: str,
     ) -> None:
         super().__init__(name, height, spd, age)
         self.set_harvest_season(harvest_season)

@@ -1,9 +1,11 @@
 class Plant:
-    def __init__(self, name: str, height: float, height_spd: float, age: int) -> None:
-        self.name = name
-        self.height = height
-        self.height_spd = height_spd
-        self.age = age
+    def __init__(
+        self, name: str, height: float, height_spd: float, age: int
+    ) -> None:
+        self.name: str = name
+        self.height: float = height
+        self.height_spd: float = height_spd
+        self.age: int = age
 
     def grow(self) -> None:
         self.height += self.height_spd
