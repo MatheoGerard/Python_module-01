@@ -18,7 +18,7 @@ class Plant:
 
 
 def plant_evolution() -> None:
-    rose = Plant("Rose", 25.0, 0.8, 30)
+    rose: Plant = Plant("Rose", 25.0, 0.8, 30)
     print("=== Garden Plant Growth ===")
     rose.show()
     total_value: float = 0.0

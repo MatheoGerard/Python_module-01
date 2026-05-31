@@ -18,7 +18,7 @@ class Plant:
 
 
 def plant_factory() -> None:
-    plants = [
+    plants: list[Plant] = [
         Plant("Rose", 25.0, 0.8, 30),
         Plant("Oak", 200.0, 0.2, 365),
         Plant("Cactus", 5.0, 0.1, 90),

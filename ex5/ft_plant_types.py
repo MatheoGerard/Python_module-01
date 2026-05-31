@@ -11,7 +11,7 @@ class Plant:
         self.set_height(height, 1)
         self.set_age(age, 1)
 
-    def set_age(self, age: int, is_init=0) -> None:
+    def set_age(self, age: int, is_init: int = 0) -> None:
         if age >= 0:
             self._age = age
             if is_init == 0:
