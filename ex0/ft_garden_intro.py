@@ -12,4 +12,5 @@ def main() -> None:
 if __name__ == "__main__":
     print("=== Welcome to My Garden ===")
     main()
+    print()
     print("=== End of Program ===")
